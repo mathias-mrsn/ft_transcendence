@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      PGDATA: ${POSTGRES_DATA}
+    volumes:
+       - postgres:${POSTGRES_DATA}
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    networks:
+      - back
+    restart: unless-stopped
+
+networks:
+  back:
+    driver: bridge
+  # front:
+  #   driver: bridge
+
+volumes: 
+  postgres:
+  
