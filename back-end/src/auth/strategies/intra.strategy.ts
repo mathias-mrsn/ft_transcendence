@@ -24,11 +24,12 @@ export class FortyTwoStrategy extends PassportStrategy(Strategy, '42')
             authorizationURL: 'https://api.intra.42.fr/oauth/authorize',
             tokenURL: 'https://api.intra.42.fr/oauth/token',
             clientID:
-              'u-s4t2ud-1046981c83859204bb48fb6c00ea886cddc4e165f1a0c19b153f14ef32d8da48',
+              'u-s4t2ud-67f3ca21dd11c42d7baa01cbf9e6a99de9d3284aec7b0c5d11fd420d0d2373d1',
             clientSecret:
-              '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',
-            callbackURL: 'http://localhost:3000/api/auth/test',
+              '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',
+            callbackURL: 'http://localhost:3000/api/auth/callback',
             scope: ['public'],
+            redirect_uri: 'http://localhost:3000/api/auth/check',
         });
     }
 
@@ -45,7 +46,7 @@ export class FortyTwoStrategy extends PassportStrategy(Strategy, '42')
             user = await this.userService.create_user(auth_dto);
         }
 
-        return (cb(null, user));
+        return (cb(null, profile));
     } 
 
     

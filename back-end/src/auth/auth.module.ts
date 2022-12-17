@@ -1,26 +1,25 @@
-import { HttpModule, HttpService } from '@nestjs/axios';
+import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
-import { FortyTwoStrategy } from './strategy/jwt.strategy';
+import { AuthController } from './controllers/auth.controller';
+import { AuthService } from './services/auth.service';
+import { FortyTwoStrategy } from './strategies/intra.strategy';
 
-import { Observable } from 'rxjs';
-import { AxiosResponse } from 'axios';
 import { UserModule } from 'src/user/user.module';
 
 @Module({
-  imports: [
-    JwtModule.register({
-    secret: "superKey",
-    signOptions: { expiresIn: '60s' },
-  }),
-    HttpModule,
-    UserModule,
-  ],
-  controllers: [AuthController],
-  providers: [AuthService, FortyTwoStrategy],
-
-  
+    imports: [
+        JwtModule,
+        HttpModule,
+        UserModule,
+    ],
+    controllers: [
+        AuthController
+    ],
+    providers: [
+        AuthService,
+        FortyTwoStrategy
+    ],
 })
+
 export class AuthModule {}
