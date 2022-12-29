@@ -25,6 +25,9 @@ export class AuthController {
     @UseGuards(IntraGuard)
     login () {
         console.log("login");
+        return {
+            data: "login"
+        }
     }
 
 
