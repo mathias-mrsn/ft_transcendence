@@ -1,3 +1,0 @@
-1: Install NodeJs
-2: Install Yarn
-3: sudo npm i -g @nestjs/cli
