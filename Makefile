@@ -2,6 +2,10 @@ DOCKER_COMPOSE = docker-compose
 DOCKER_COMPOSE_FILE = srcs/docker-compose-dev.yml
 BASH = /bin/bash
 CLEAR_FILE = ./srcs/.dev/docker-cleaner.sh
+DOCKER_EXEC = docker exec -it
+FRONT_NAME = front-end
+BACK_NAME = back-end
+SCRIPT_TO_RUN = /bin/bash
 
 all:	up
 re:		restart
@@ -13,6 +17,12 @@ up-front:
 
 up-back:
 		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} up --build -d
+
+in-front:
+		@${DOCKER_EXEC} ${FRONT_NAME} ${SCRIPT_TO_RUN}
+
+in-back:
+		@${DOCKER_EXEC} ${BACK_NAME} ${SCRIPT_TO_RUN}
 
 stop:	
 		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} stop

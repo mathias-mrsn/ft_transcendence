@@ -14,7 +14,7 @@ services:
     ports:
       - "${POSTGRES_PORT}:${POSTGRES_PORT}"
     networks:
-      - back
+      - db
     restart: unless-stopped
 
   back-end:
@@ -27,15 +27,17 @@ services:
       - ${BACKEND_PORT}:${BACKEND_PORT}
     restart: unless-stopped
     networks:
-      - back
+      - db
     volumes:
-      - back-end_volume:/var/www/back-end
-    command: ["npm", "install", "/var/www/back-end", "&&", "sleep", "10000000"]
+      - ./requirement/back-end:/home/back-end
+    command: ["sleep", "100000000000"]
 
     # front:
 
 networks:
   back:
+    driver: bridge
+  db:
     driver: bridge
   # front:
   #   driver: bridge
@@ -43,10 +45,4 @@ networks:
 volumes: 
   postgres_volume:
 
-  back-end_volume:
-    driver: "local"
-    driver_opts:
-      type: "none"
-      device: "./requirement/back-end"
-      o: "bind"
   
