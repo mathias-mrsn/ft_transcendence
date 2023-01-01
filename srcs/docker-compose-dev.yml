@@ -11,8 +11,8 @@ services:
       PGDATA: ${POSTGRES_DATA}
     volumes:
        - postgres_volume:${POSTGRES_DATA}
-    ports:
-      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    expose:
+      - "${POSTGRES_PORT}"
     networks:
       - db
     restart: unless-stopped
