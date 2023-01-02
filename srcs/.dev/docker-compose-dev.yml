@@ -21,15 +21,16 @@ services:
     container_name: back-end
     hostname: back-end
     build:
-      context: ./.dev/back-end
+      context: ./back-end
       dockerfile: Dockerfile
     ports:
       - ${BACKEND_PORT}:${BACKEND_PORT}
+      - ${PRISMA_PORT}:${PRISMA_PORT}
     restart: unless-stopped
     networks:
       - db
     volumes:
-      - ./requirement/back-end:/home/back-end
+      - ./../requirement/back-end:/home/back-end
     command: ["sleep", "100000000000"]
 
     # front:

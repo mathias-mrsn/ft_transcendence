@@ -14,7 +14,7 @@ RUN apt-get update -y \
     && apt-get install -y git \
     && apt-get install -y ssh
 
-RUN npm i -g npm@latest
+# RUN npm i -g npm@latest
 # RUN npm i -g yarn
 # RUN
 
