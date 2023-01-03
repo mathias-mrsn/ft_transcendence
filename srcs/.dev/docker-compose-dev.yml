@@ -1,6 +1,20 @@
 version: '3.8'
 
 services:
+
+  # portainer:
+  #     image: portainer/portainer-ce:latest
+  #     container_name: portainer
+  #     restart: unless-stopped
+  #     security_opt:
+  #       - no-new-privileges:true
+  #     volumes:
+  #       - /etc/localtime:/etc/localtime:ro
+  #       - /var/run/docker.sock:/var/run/docker.sock:ro
+  #       - ./portainer-data:/data
+  #     ports:
+  #       - 9000:9000
+
   postgres:
     container_name: postgres
     image: postgres
@@ -21,9 +35,9 @@ services:
     container_name: api
     hostname: back-end
     build:
-      context: ./requirements/back-end
+      context: ./../requirements/back-end
       dockerfile: Dockerfile
-      target: production
+      target: development
     ports:
       - ${API_PORT}:${API_PORT}
       - ${PRISMA_PORT}:${PRISMA_PORT}
@@ -31,7 +45,9 @@ services:
     networks:
       - db
       - back
-    command: ["npm", "run", "start:production"]
+    volumes:
+      - ./../requirements/back-end/app:/usr/back-end/app
+    command: ["npm", "run", "start:development"]
 
     # front:
 
@@ -45,5 +61,3 @@ networks:
 
 volumes: 
   postgres_volume:
-
-  

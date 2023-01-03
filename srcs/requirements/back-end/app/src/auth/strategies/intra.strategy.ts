@@ -9,7 +9,7 @@ import { HttpService } from '@nestjs/axios';
 import { Response, Request } from 'express';
 import { lastValueFrom, map } from "rxjs";
 import { AuthDTO } from "../dtos/auth.dto";
-import { UserService } from "src/user/user.service";
+import { UserService } from "app/src/user/user.service";
 
 
 @Injectable()

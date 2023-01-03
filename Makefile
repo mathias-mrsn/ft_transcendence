@@ -6,36 +6,36 @@
 #    By: mamaurai <mamaurai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 10:42:00 by mamaurai          #+#    #+#              #
-#    Updated: 2023/01/03 14:57:49 by mamaurai         ###   ########.fr        #
+#    Updated: 2023/01/03 18:51:53 by mamaurai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Only two modes are available: dev and production
-MODE = dev
+# Only two modes are available: development and production
+MODE = development
 
-ifeq ($(MODE), dev)
-	DOCKER_ENV_FILE = srcs/.dev/.env
+ifeq ($(MODE), development)
+	DOCKER_COMPOSE_FILE = ./srcs/.dev/docker-compose-dev.yml
 else
-	DOCKER_ENV_FILE = srcs/.env
+	DOCKER_COMPOSE_FILE = srcs/docker-compose.yml
 endif
 
-DOCKER_COMPOSE_FILE = srcs/docker-compose.yml
+DOCKER_ENV_FILE = ./srcs/.dev/.env
 DOCKER_COMPOSE = docker-compose
 BASH = /bin/bash
 CLEAR_FILE = ./srcs/.dev/docker-cleaner.sh
 DOCKER_EXEC = docker exec -it
 FRONT_NAME = front-end
-BACK_NAME = back-end
+BACK_NAME = api
 SCRIPT_TO_RUN = /bin/bash
 
-ifeq ($(MODE),$(filter $(MODE),dev production))
+ifeq ($(MODE),$(filter $(MODE),development production))
 all:	up
 else
 all:
-		@echo "Invalid mode, please use 'make MODE=dev' or 'make MODE=prod' to run the project."
+		@echo "Invalid mode, please use 'make MODE=development' or 'make MODE=prod' to run the project."
 endif
 
-ifeq ($(MODE),$(filter $(MODE),dev production))
+ifeq ($(MODE),$(filter $(MODE),development production))
 re:		restart
 
 up:		up-back
@@ -55,10 +55,10 @@ restart:
 		@${DOCKER_COMPOSE} --env-file ${DOCKER_ENV_FILE} -f ${DOCKER_COMPOSE_FILE} up --build -d
 
 status:
-		@${DOCKER_COMPOSE} -f ${DOCKER_COMPOSE_FILE} ps
+		@${DOCKER_COMPOSE} --env-file ${DOCKER_ENV_FILE} -f ${DOCKER_COMPOSE_FILE} ps
 endif
 
-ifeq (${MODE}, dev)
+ifeq (${MODE}, development)
 up-front:
 		@${DOCKER_COMPOSE} --env-file ${DOCKER_ENV_FILE} -f ${DOCKER_COMPOSE_FILE} up --build
 

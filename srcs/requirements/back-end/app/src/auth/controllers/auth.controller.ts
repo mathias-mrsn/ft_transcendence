@@ -44,6 +44,14 @@ export class AuthController {
         };
     }
 
+    @Get('test2')
+    // @UseGuards(IntraGuard)
+    test2 () {
+        return {
+            message: "You are logged in"
+        };
+    }
+
     @Get('callback')
     @UseGuards(IntraGuard)
     callback (@Req() req: any, @Res() res: any) {

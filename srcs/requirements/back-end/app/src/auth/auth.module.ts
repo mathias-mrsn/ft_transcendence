@@ -5,7 +5,7 @@ import { AuthController } from './controllers/auth.controller';
 import { AuthService } from './services/auth.service';
 import { FortyTwoStrategy } from './strategies/intra.strategy';
 
-import { UserModule } from 'src/user/user.module';
+import { UserModule } from 'app/src/user/user.module';
 
 @Module({
     imports: [
