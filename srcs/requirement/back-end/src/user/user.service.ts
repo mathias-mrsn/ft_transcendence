@@ -1,6 +1,5 @@
 import { PrismaService } from './../prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
-import { prisma } from '@prisma/client';
 import { AuthDTO } from 'src/auth/dtos/auth.dto';
 import {UserEntity} from './entities/user.entity';
 import { UserDTO } from './dtos/user.dto';

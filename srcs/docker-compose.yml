@@ -10,19 +10,41 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       PGDATA: ${POSTGRES_DATA}
     volumes:
-       - postgres:${POSTGRES_DATA}
-    ports:
-      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+       - postgres_volume:${POSTGRES_DATA}
+    expose:
+      - "${POSTGRES_PORT}"
     networks:
-      - back
+      - db
     restart: unless-stopped
+
+  back-end:
+    container_name: back-end
+    hostname: back-end
+    build:
+      context: ./requirement/back-end
+      dockerfile: Dockerfile
+      target: development
+    ports:
+      - ${BACKEND_PORT}:${BACKEND_PORT}
+      - ${PRISMA_PORT}:${PRISMA_PORT}
+    restart: unless-stopped
+    networks:
+      - db
+    volumes:
+      - ./requirement/back-end/src:/usr/back-end/src
+    command: ["sleep", "100000000000"]
+
+    # front:
 
 networks:
   back:
+    driver: bridge
+  db:
     driver: bridge
   # front:
   #   driver: bridge
 
 volumes: 
-  postgres:
+  postgres_volume:
+
   

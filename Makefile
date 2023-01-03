@@ -6,7 +6,7 @@
 #    By: mamaurai <mamaurai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 10:42:00 by mamaurai          #+#    #+#              #
-#    Updated: 2023/01/02 11:03:52 by mamaurai         ###   ########.fr        #
+#    Updated: 2023/01/03 14:57:49 by mamaurai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,12 @@
 MODE = dev
 
 ifeq ($(MODE), dev)
-	DOCKER_COMPOSE_FILE = srcs/.dev/docker-compose-dev.yml
-	DOCKER_ENV_FILE = srcs/.env
+	DOCKER_ENV_FILE = srcs/.dev/.env
 else
-	DOCKER_COMPOSE_FILE = srcs/docker-compose.yml
 	DOCKER_ENV_FILE = srcs/.env
 endif
 
+DOCKER_COMPOSE_FILE = srcs/docker-compose.yml
 DOCKER_COMPOSE = docker-compose
 BASH = /bin/bash
 CLEAR_FILE = ./srcs/.dev/docker-cleaner.sh
