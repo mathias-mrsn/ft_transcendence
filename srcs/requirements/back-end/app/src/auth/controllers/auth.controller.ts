@@ -37,7 +37,7 @@ export class AuthController {
     // }
 
     @Get('test')
-    @UseGuards(IntraGuard)
+    // @UseGuards(IntraGuard)
     test () {
         return {
             message: "You are logged in"
