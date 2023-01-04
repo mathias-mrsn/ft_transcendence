@@ -11,6 +11,7 @@ RUN npm install -g npm@latest
 RUN npm install
 RUN npx prisma generate --schema='./app/prisma/schema.prisma'
 
+
 FROM node:18 As production
 
 WORKDIR /usr/back-end

@@ -41,6 +41,7 @@ export class FortyTwoStrategy extends PassportStrategy(Strategy, '42')
     ) {
         const auth_dto : AuthDTO = await this.userService.fetch_token_owner(accessToken);
 
+        console.log("salut")
         let user = await this.userService.find_user_by_DTO(auth_dto);
         if (user === undefined) {
             user = await this.userService.create_user(auth_dto);

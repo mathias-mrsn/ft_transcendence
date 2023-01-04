@@ -6,7 +6,7 @@
 #    By: mamaurai <mamaurai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 10:42:00 by mamaurai          #+#    #+#              #
-#    Updated: 2023/01/03 18:51:53 by mamaurai         ###   ########.fr        #
+#    Updated: 2023/01/04 14:47:35 by mamaurai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,8 +76,8 @@ drestart:
 		@${BASH} ${CLEAR_FILE} || true
 		@${DOCKER_COMPOSE} --env-file ${DOCKER_ENV_FILE} -f ${DOCKER_COMPOSE_FILE} up --build -d
 		
-logs:
-		@${DOCKER_COMPOSE} --env-file ${DOCKER_ENV_FILE} -f ${DOCKER_COMPOSE_FILE} logs --tail=100
+api-logs:
+		@${DOCKER_COMPOSE} --env-file ${DOCKER_ENV_FILE} -f ${DOCKER_COMPOSE_FILE} logs ${BACK_NAME} --tail=100
 endif
 
 .PHONY: all re up up-back stop clean dclean restart drestart status logs

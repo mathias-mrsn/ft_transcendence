@@ -13,6 +13,7 @@ services:
 
   postgres:
     container_name: postgres
+    hostname: postgres
     image: postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -21,15 +22,15 @@ services:
       PGDATA: ${POSTGRES_DATA}
     volumes:
        - postgres_volume:${POSTGRES_DATA}
-    expose:
-      - "${POSTGRES_PORT}"
+    ports:
+      - "35432:5432"
     networks:
       - db
     restart: unless-stopped
 
   api:
     container_name: api
-    hostname: back-end
+    hostname: api
     build:
       context: ./../requirements/back-end
       dockerfile: Dockerfile
