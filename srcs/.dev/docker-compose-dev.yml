@@ -13,7 +13,7 @@ services:
 
   postgres:
     container_name: postgres
-    hostname: postgres
+    # hostname: postgres
     image: postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -23,7 +23,7 @@ services:
     volumes:
        - postgres_volume:${POSTGRES_DATA}
     ports:
-      - "35432:5432"
+      - "5432:5432"
     networks:
       - db
     restart: unless-stopped

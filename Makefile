@@ -6,7 +6,7 @@
 #    By: mamaurai <mamaurai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 10:42:00 by mamaurai          #+#    #+#              #
-#    Updated: 2023/01/04 14:47:35 by mamaurai         ###   ########.fr        #
+#    Updated: 2023/01/06 15:00:30 by mamaurai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ DOCKER_EXEC = docker exec -it
 FRONT_NAME = front-end
 BACK_NAME = api
 SCRIPT_TO_RUN = /bin/bash
+PRISMA_STUDIO_CMD = npx prisma studio --schema='app/prisma/schema.prisma'
 
 ifeq ($(MODE),$(filter $(MODE),development production))
 all:	up
@@ -77,7 +78,10 @@ drestart:
 		@${DOCKER_COMPOSE} --env-file ${DOCKER_ENV_FILE} -f ${DOCKER_COMPOSE_FILE} up --build -d
 		
 api-logs:
-		@${DOCKER_COMPOSE} --env-file ${DOCKER_ENV_FILE} -f ${DOCKER_COMPOSE_FILE} logs ${BACK_NAME} --tail=100
+		@${DOCKER_COMPOSE} --env-file ${DOCKER_ENV_FILE} -f ${DOCKER_COMPOSE_FILE} logs --tail=100 ${BACK_NAME}
+
+studio:
+		@${DOCKER_EXEC} -d ${BACK_NAME} ${PRISMA_STUDIO_CMD}
 endif
 
 .PHONY: all re up up-back stop clean dclean restart drestart status logs
