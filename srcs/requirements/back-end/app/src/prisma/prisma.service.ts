@@ -7,7 +7,7 @@ export class PrismaService extends PrismaClient {
         super({
             datasources: {
                 db : {
-                    url: "postgresql://postgres:2YvkI%byW8CXfE^KLLRd*1XUk6fst27gdd6@97loOV@localhost:5432/ft_transcendence_database?schema=public",
+                    url: "postgresql://postgres:2YvkI%byW8CXfE^KLLRd*1XUk6fst27gdd6@97loOV@postgres:5432/ft_transcendence_database?schema=public",
                 }
             }
         });

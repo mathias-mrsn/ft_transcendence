@@ -44,6 +44,8 @@ services:
       - back
     volumes:
       - ./../requirements/back-end/app:/usr/back-end/app
+    depends_on:
+      - postgres
     command: ["npm", "run", "start:development"]
 
     # front:
