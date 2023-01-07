@@ -30,4 +30,4 @@ RUN npm install
 RUN npx prisma generate --schema='./app/prisma/schema.prisma'
 RUN npx prisma migrate reset --schema='./app/prisma/schema.prisma'
 
-
+ENTRYPOINT [ "/bin/bash", "/usr/bin/entrypoint.sh" ]

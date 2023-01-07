@@ -6,7 +6,7 @@
 #    By: mamaurai <mamaurai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 10:42:00 by mamaurai          #+#    #+#              #
-#    Updated: 2023/01/06 17:15:37 by mamaurai         ###   ########.fr        #
+#    Updated: 2023/01/07 16:52:17 by mamaurai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ DOCKER_COMPOSE = docker-compose
 BASH = /bin/bash
 CLEAR_FILE = ./srcs/.dev/docker-cleaner.sh
 DOCKER_EXEC = docker exec -it
-FRONT_NAME = front-end
+FRONT_NAME = front
 BACK_NAME = api
 SCRIPT_TO_RUN = /bin/bash
 PRISMA_STUDIO_CMD = npx prisma studio --schema='app/prisma/schema.prisma'
@@ -80,6 +80,9 @@ drestart:
 		
 api-logs:
 		@${DOCKER_COMPOSE} --env-file ${DOCKER_ENV_FILE} -f ${DOCKER_COMPOSE_FILE} logs --tail=100 ${BACK_NAME}
+
+front-logs:
+		@${DOCKER_COMPOSE} --env-file ${DOCKER_ENV_FILE} -f ${DOCKER_COMPOSE_FILE} logs --tail=100 ${FRONT_NAME}
 
 studio:
 		@${DOCKER_EXEC} -d ${BACK_NAME} ${PRISMA_STUDIO_CMD}

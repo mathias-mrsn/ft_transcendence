@@ -48,15 +48,33 @@ services:
       - postgres
     command: ["npm", "run", "start:development"]
 
-    # front:
+  front:
+    container_name: front
+    hostname: front
+    build:
+      context: ./../requirements/front-end
+      dockerfile: Dockerfile
+      target: development
+    ports:
+      - ${FRONT_PORT}:${FRONT_PORT}
+    environment:
+      - API_PORT=${API_PORT}
+      - PORT=${FRONT_PORT}
+    restart: unless-stopped
+    networks:
+      - back
+    volumes:
+      - ./../requirements/front-end/app:/usr/front-end/app
+    depends_on:
+      - api
+      - postgres
+    command: ["npm", "run", "start"]
 
 networks:
   back:
     driver: bridge
   db:
     driver: bridge
-  # front:
-  #   driver: bridge
 
 volumes: 
   postgres_volume:
