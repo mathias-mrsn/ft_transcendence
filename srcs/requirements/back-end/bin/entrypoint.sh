@@ -8,5 +8,9 @@ done
 npx prisma generate --schema='./app/prisma/schema.prisma'
 npx prisma migrate dev --schema='./app/prisma/schema.prisma'
 
+if [ "$MODE" = 'development' ]; then
+    /usr/sbin/sshd
+fi
+
 exec "$@"
 

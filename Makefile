@@ -6,7 +6,7 @@
 #    By: mamaurai <mamaurai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 10:42:00 by mamaurai          #+#    #+#              #
-#    Updated: 2023/01/07 16:52:17 by mamaurai         ###   ########.fr        #
+#    Updated: 2023/01/08 18:24:15 by mamaurai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,6 +89,10 @@ studio:
 
 migrate:
 		@${DOCKER_EXEC} -d ${BACK_NAME} ${MIGRATE_CMD}
+
+disable-strict-host:
+		@echo "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+		
 endif
 
 .PHONY: all re up up-back stop clean dclean restart drestart status logs
