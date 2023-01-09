@@ -1,4 +1,4 @@
-FROM node:18 As development
+FROM node:18 As workspace-42
 
 WORKDIR /usr/back-end
 
@@ -22,6 +22,28 @@ RUN npm install -g npm@latest
 RUN npm install
 
 ENTRYPOINT [ "/bin/bash", "/usr/bin/entrypoint.sh" ]
+
+
+
+FROM node:18 As development
+
+WORKDIR /usr/back-end
+
+# COPY . .
+COPY ./bin/entrypoint.sh /usr/bin/entrypoint.sh
+
+RUN apt-get update -y
+RUN apt-get install -y postgresql-client vim
+
+# RUN rm -f ./package.json
+# RUN ln -s ./app/package.json ./package.json
+
+RUN npm install -g npm@latest
+# RUN npm install
+
+ENTRYPOINT [ "/bin/bash", "/usr/bin/entrypoint.sh" ]
+
+
 
 FROM node:18 As production
 

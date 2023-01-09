@@ -6,17 +6,21 @@
 #    By: mamaurai <mamaurai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 10:42:00 by mamaurai          #+#    #+#              #
-#    Updated: 2023/01/08 18:24:15 by mamaurai         ###   ########.fr        #
+#    Updated: 2023/01/09 14:52:57 by mamaurai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Only two modes are available: development and production
+# Only three modes are available: development, production and workspace-42 
 MODE = development
 
 ifeq ($(MODE), development)
 	DOCKER_COMPOSE_FILE = ./srcs/.dev/docker-compose-dev.yml
 else
-	DOCKER_COMPOSE_FILE = srcs/docker-compose.yml
+	ifeq ($(MODE), workspace-42)
+		DOCKER_COMPOSE_FILE = srcs/.dev/docker-compose-workspace-42.yml
+	else
+		DOCKER_COMPOSE_FILE = srcs/docker-compose.yml
+	endif
 endif
 
 DOCKER_ENV_FILE = ./srcs/.dev/.env
@@ -30,14 +34,14 @@ SCRIPT_TO_RUN = /bin/bash
 PRISMA_STUDIO_CMD = npx prisma studio --schema='app/prisma/schema.prisma'
 MIGRATE_CMD = npx prisma migrate dev --schema='./app/prisma/schema.prisma'
 
-ifeq ($(MODE),$(filter $(MODE),development production))
+ifeq ($(MODE),$(filter $(MODE),development production workspace-42))
 all:	up
 else
 all:
 		@echo "Invalid mode, please use 'make MODE=development' or 'make MODE=prod' to run the project."
 endif
 
-ifeq ($(MODE),$(filter $(MODE),development production))
+ifeq ($(MODE),$(filter $(MODE),development production workspace-42))
 re:		restart
 
 up:		up-back
@@ -60,7 +64,7 @@ status:
 		@${DOCKER_COMPOSE} --env-file ${DOCKER_ENV_FILE} -f ${DOCKER_COMPOSE_FILE} ps
 endif
 
-ifeq (${MODE}, development)
+ifeq ($(MODE),$(filter $(MODE),development workspace-42))
 up-front:
 		@${DOCKER_COMPOSE} --env-file ${DOCKER_ENV_FILE} -f ${DOCKER_COMPOSE_FILE} up --build
 
@@ -89,10 +93,14 @@ studio:
 
 migrate:
 		@${DOCKER_EXEC} -d ${BACK_NAME} ${MIGRATE_CMD}
+	
+endif
 
-disable-strict-host:
-		@echo "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-		
+ifeq ($(MODE), workspace-42)
+
+ssh-keygen:
+		@ssh-keygen -R localhost
+
 endif
 
 .PHONY: all re up up-back stop clean dclean restart drestart status logs

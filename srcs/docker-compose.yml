@@ -41,6 +41,10 @@ services:
     networks:
       - db
       - back
+    environment:
+      - MODE=production
+      - DATABASE_URL=${DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
     command: ["npm", "run", "start:production"]
 
   front:

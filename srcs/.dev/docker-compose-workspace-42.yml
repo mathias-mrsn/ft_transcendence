@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
 
+  #! Doesn't work at 42
   portainer:
     image: portainer/portainer:latest
     ports:
@@ -10,6 +11,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer-data:/data
+  #! /////////
 
   postgres:
     container_name: postgres
@@ -34,20 +36,23 @@ services:
     build:
       context: ./../requirements/back-end
       dockerfile: Dockerfile
-      target: development
+      target: workspace-42
+      args:
+        - SSH_ROOT_PASSWORD=${API_ROOT_PASSWORD}
     ports:
       - ${API_PORT}:${API_PORT}
       - ${PRISMA_PORT}:${PRISMA_PORT}
+      - "22:22"
     restart: unless-stopped
     networks:
       - db
       - back
     volumes:
-      - ./../requirements/back-end:/usr/back-end
+      - ./../requirements/back-end/app:/usr/back-end/app
     depends_on:
       - postgres
     environment:
-      - MODE=development
+      - MODE=workspace-42
       - DATABASE_URL=${DATABASE_URL}
       - JWT_SECRET=${JWT_SECRET}
     command: ["npm", "run", "start:development"]
@@ -58,7 +63,7 @@ services:
     build:
       context: ./../requirements/front-end
       dockerfile: Dockerfile
-      target: development
+      target: workspace-42
     ports:
       - ${FRONT_PORT}:${FRONT_PORT}
     environment:

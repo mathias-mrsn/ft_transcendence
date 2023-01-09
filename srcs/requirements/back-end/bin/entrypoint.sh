@@ -5,10 +5,16 @@ until (pg_isready --dbname=ft_transcendence_database --host=postgres --port=5432
     sleep 1
 done
 
+if [ "$MODE" = 'development' ]; then
+    rm -f ./package.json 
+    ln -s ./app/package.json ./package.json
+    npm install
+fi
+
 npx prisma generate --schema='./app/prisma/schema.prisma'
 npx prisma migrate dev --schema='./app/prisma/schema.prisma'
 
-if [ "$MODE" = 'development' ]; then
+if [ "$MODE" = 'workspace-42' ]; then
     /usr/sbin/sshd
 fi
 
