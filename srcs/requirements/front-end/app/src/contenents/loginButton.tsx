@@ -2,12 +2,12 @@
 
 export function LoginButton() {
 
-    async function LoginButton () {
+    async function LoginAction () {
         console.log('Login Button Clicked');
         // const {data} = await axios.get('http://localhost:3000/api/auth/login',
        
-        const res = await fetch('http://api:3000/api/auth/login');
-        
+        const res = await fetch('http://localhost:3000/api/auth/login');
+
             // mode: 'cors',
             // headers: {
             //     'Access-Control-Allow-Origin' : "http://localhost:3000",
@@ -24,6 +24,6 @@ export function LoginButton() {
     }
 
     return (
-        <button onClick={LoginButton}>Log In</button>
+        <button onClick={LoginAction}>Login</button>
     );
 }

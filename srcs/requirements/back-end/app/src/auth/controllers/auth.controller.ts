@@ -22,7 +22,7 @@ export class AuthController {
     }
 
     @Get('login')
-    @UseGuards(IntraGuard)
+    // @UseGuards(IntraGuard)
     login () {
         console.log("login");
         return {
@@ -58,7 +58,7 @@ export class AuthController {
 
         console.log("callback");
         // res.redirect('http://localhost:3000/api/auth/check'); // Redirection to the front home page
-        res.send('http://localhost:3030');
+        res.send('http://localhost:4200');
     }
 
 }
