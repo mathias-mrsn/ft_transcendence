@@ -35,6 +35,7 @@ RUN apt-get update -y
 RUN apt-get install -y postgresql-client vim
 
 RUN npm install -g npm@latest
+RUN npm install -g @nestjs/cli
 
 ENTRYPOINT [ "/bin/bash", "/usr/bin/entrypoint.sh" ]
 
@@ -50,6 +51,7 @@ RUN rm -f ./package.json
 RUN ln -s ./app/package.json ./package.json
 
 RUN npm install -g npm@latest
+RUN npm install -g @nestjs/cli
 RUN npm install
 RUN npx prisma generate --schema='./app/prisma/schema.prisma'
 RUN npx prisma migrate reset --schema='./app/prisma/schema.prisma'
