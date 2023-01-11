@@ -14,9 +14,5 @@ fi
 npx prisma generate --schema='./app/prisma/schema.prisma'
 npx prisma migrate dev --schema='./app/prisma/schema.prisma'
 
-if [ "$MODE" = 'workspace-42' ]; then
-    /usr/sbin/sshd
-fi
-
 exec "$@"
 

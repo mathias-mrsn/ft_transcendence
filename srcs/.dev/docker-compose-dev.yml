@@ -64,14 +64,15 @@ services:
     environment:
       - API_PORT=${API_PORT}
       - PORT=${FRONT_PORT}
+      - MODE=development
     restart: unless-stopped
     networks:
       - back
     volumes:
-      - ./../requirements/front-end/app:/usr/front-end/app
+      - ./../requirements/front-end:/usr/front-end
     depends_on:
       - api
-      - postgres
+      - postgres      
     command: ["npm", "run", "start"]
 
 networks:

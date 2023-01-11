@@ -1,0 +1,59 @@
+.register{
+    max-width: 1000px;
+    margin: auto;
+    display:flex;
+    border-radius: 10px;
+    box-shadow: 1px 3px 10px #131313;
+    background-color: rgb(248, 248, 248);
+    align-items: center;
+    text-align: center;
+}
+
+.left {
+    width: 50%;
+    float: left;
+    display: grid;
+
+    margin: auto;
+    padding: 3em 0;
+}
+
+.right {
+    width: 50%;
+    float: right;
+    /* border: 4px solid #e9ecef; */
+    align-items: center;
+}
+
+h2 {
+    margin: 1em;
+}
+
+input {
+    padding: 1em;
+    margin: 1em 0;
+}
+
+button {
+    padding: 10px;
+    margin: 1em 0;
+    font-size: medium;
+    width: 30%;
+    border-radius: 30em;
+    border-color: blue;
+    background-color: rgb(58, 58, 253);
+    color:rgb(248, 248, 248)
+}
+
+@media screen and (min-width: 600px) { /* if is phone */
+    .register{
+        max-width: 1000px;
+        margin: auto;
+        display:flex;
+        border-radius: 10px;
+        box-shadow: 1px 3px 10px #131313;
+        background-color: rgb(248, 248, 248);
+        align-items: center;
+        text-align: center;
+    }
+}

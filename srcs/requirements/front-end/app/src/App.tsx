@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { LoginButton } from './contenents/loginButton';
+import { RegisterForm } from './components/Forms/RegisterForm';
 
 function App() {
     // const niquetoi = "niquetoi";
@@ -9,9 +9,7 @@ function App() {
 
   return (
     <div className="App">
-        <h1>transcen-dance de bg</h1>
-        <LoginButton/>
-        <p>salut c'est gustave</p>
+        <RegisterForm/>
     </div>
   );
 }
